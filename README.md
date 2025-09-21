@@ -164,8 +164,8 @@ if err != nil {
     log.Fatal(err)
 }
 
-for name, value := range cookies {
-    fmt.Printf("Cookie %s = %s\n", name, value)
+for cookie := range cookies {
+    fmt.Printf("Cookie %s = %s\n", cookie.Name, cookie.Value)
 }
 
 // Clear all cookies

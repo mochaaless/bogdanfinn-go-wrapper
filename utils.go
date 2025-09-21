@@ -190,7 +190,7 @@ func handleResponse(s *Session, request RequestOptions, req *http.Request, err e
 		return emptyResponse
 	}
 
-	if s == nil || s.Client == nil {
+	if s.IsValid() {
 		emptyResponse.Error = "Session or client is nil"
 		return emptyResponse
 	}
