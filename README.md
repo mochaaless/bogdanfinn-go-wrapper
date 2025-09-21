@@ -16,7 +16,7 @@ A powerful and user-friendly Go wrapper for the [bogdanfinn/tls-client](https://
 ## 📦 Installation
 
 ```bash
-go get github.com/your-username/bogdanfinn-go-wrapper
+go get github.com/mochaaless/bogdanfinn-go-wrapper
 ```
 
 ## 🔧 Quick Start
@@ -29,7 +29,7 @@ package main
 import (
     "fmt"
     "log"
-    wrapper "github.com/your-username/bogdanfinn-go-wrapper"
+    wrapper "github.com/mochaaless/bogdanfinn-go-wrapper"
 )
 
 func main() {
@@ -259,7 +259,7 @@ import (
     "fmt"
     "log"
     "net/url"
-    wrapper "github.com/your-username/bogdanfinn-go-wrapper"
+    wrapper "github.com/mochaaless/bogdanfinn-go-wrapper"
 )
 
 func main() {
