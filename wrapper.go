@@ -32,13 +32,13 @@ func NewSession(config *SessionConfig) (*Session, error) {
 		tls_client.WithCookieJar(jar),
 	}
 
-	session, err := tls_client.NewHttpClient(tls_client.NewNoopLogger(), options...)
+	client, err := tls_client.NewHttpClient(tls_client.NewNoopLogger(), options...)
 	if err != nil {
 		return nil, fmt.Errorf("error creating TLS session: %w", err)
 	}
 
 	return &Session{
-		Client:          session,
+		Client:          client,
 		UserAgent:       getStringOrDefault(config.UserAgent, user_agent),
 		SecChUa:         getStringOrDefault(config.SecChUa, sech_ua),
 		SecChUaPlatform: getStringOrDefault(config.SecChUaPlatform, sech_ua_platform),
@@ -59,7 +59,7 @@ func NewSessionLegacy(ua, s_ua, s_ua_platform *string, timeout *int) (*Session, 
 
 func (s *Session) executeRequest(method string, request RequestOptions) Response {
 	// Validate session
-	if s.IsValid() {
+	if !s.IsValid() {
 		return Response{
 			Url:        nil,
 			Cookies:    nil,
@@ -181,7 +181,7 @@ func (s *Session) Options(request RequestOptions) Response {
 
 // SetCookies sets a cookie for the session
 func (s *Session) SetCookies(name, value string, targetURL *url.URL) error {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return fmt.Errorf("session or client is nil")
 	}
 
@@ -208,7 +208,7 @@ func (s *Session) SetCookies(name, value string, targetURL *url.URL) error {
 
 // SetCookiesWithOptions sets a cookie with custom options
 func (s *Session) SetCookiesWithOptions(cookie *http.Cookie, targetURL *url.URL) error {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return fmt.Errorf("session or client is nil")
 	}
 
@@ -230,7 +230,7 @@ func (s *Session) SetCookiesWithOptions(cookie *http.Cookie, targetURL *url.URL)
 
 // SetProxy sets a proxy for the session
 func (s *Session) SetProxy(proxy string) error {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return fmt.Errorf("session or client is nil")
 	}
 
@@ -249,7 +249,7 @@ func (s *Session) SetProxy(proxy string) error {
 
 // ClearCookies clears all cookies from the session
 func (s *Session) ClearCookies() error {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return fmt.Errorf("session or client is nil")
 	}
 
@@ -264,7 +264,7 @@ func (s *Session) ClearCookies() error {
 
 // GetCookies returns all cookies with full details
 func (s *Session) GetCookies(targetURL *url.URL) ([]*http.Cookie, error) {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return nil, fmt.Errorf("session or client is nil")
 	}
 
@@ -282,7 +282,7 @@ func (s *Session) GetCookies(targetURL *url.URL) ([]*http.Cookie, error) {
 
 // GetCookie returns the value of a specific cookie by name, or nil if not found
 func (s *Session) GetCookie(name string, targetURL *url.URL) *http.Cookie {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return nil
 	}
 
@@ -303,7 +303,7 @@ func (s *Session) GetCookie(name string, targetURL *url.URL) *http.Cookie {
 
 // Close gracefully closes the session (if needed)
 func (s *Session) Close() error {
-	if s.IsValid() {
+	if !s.IsValid() {
 		return nil // Already closed or nil
 	}
 
