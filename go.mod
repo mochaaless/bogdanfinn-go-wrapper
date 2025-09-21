@@ -1,4 +1,4 @@
-module bogdanfinn_go_wrapper
+module github.com/mochaaless/bogdanfinn-go-wrapper
 
 go 1.24.1
 
