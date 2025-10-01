@@ -127,7 +127,7 @@ func (s *Session) executeWithRetry(request RequestOptions, req *http.Request) Re
 		resp := handleResponse(s, request, req, nil)
 
 		// If no session error, return the response
-		if !ContainsSessionError(resp.Error) {
+		if resp.Error == "" {
 			return resp
 		}
 

@@ -238,21 +238,6 @@ func handleResponse(s *Session, request RequestOptions, req *http.Request, err e
 	}
 }
 
-// Session error check with case insensitive matching
-func ContainsSessionError(item string) bool {
-	if item == "" || len(sessionErrors) == 0 {
-		return false
-	}
-
-	lowerItem := strings.ToLower(item)
-	for _, v := range sessionErrors {
-		if strings.Contains(lowerItem, strings.ToLower(v)) {
-			return true
-		}
-	}
-	return false
-}
-
 // Utility functions
 func getIntOrDefault(value *int, defaultValue int) int {
 	if value != nil {
