@@ -12,7 +12,7 @@ import (
 )
 
 // Format headers with default values and error handling
-func formatHeaders(headers map[string]string) (http.Header, error) {
+func formatHeaders(s *Session, headers map[string]string) (http.Header, error) {
 	if headers == nil {
 		return http.Header{}, nil
 	}
@@ -32,15 +32,15 @@ func formatHeaders(headers map[string]string) (http.Header, error) {
 		switch normalizedKey {
 		case "user-agent":
 			if value == "" || value == "default" {
-				value = user_agent
+				value = s.UserAgent
 			}
 		case "sec-ch-ua":
 			if value == "" || value == "default" {
-				value = sech_ua
+				value = s.SecChUa
 			}
 		case "sec-ch-ua-platform":
 			if value == "" || value == "default" {
-				value = sech_ua_platform
+				value = s.SecChUaPlatform
 			}
 		}
 
@@ -196,7 +196,7 @@ func handleResponse(s *Session, request RequestOptions, req *http.Request, err e
 	}
 
 	// Format headers with error handling
-	headers, err := formatHeaders(request.Headers)
+	headers, err := formatHeaders(s, request.Headers)
 	if err != nil {
 		emptyResponse.Error = fmt.Sprintf("Error formatting headers: %v", err)
 		return emptyResponse
