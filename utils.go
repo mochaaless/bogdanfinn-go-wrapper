@@ -18,17 +18,18 @@ func formatHeaders(s *Session, headers map[string]string) (http.Header, error) {
 	}
 
 	formattedHeaders := http.Header{}
-	var order []string
+	order := make([]string, 0, len(headers))
 
-	for key, value := range headers {
-		// Validate that key is not empty
-		if strings.TrimSpace(key) == "" {
-			return nil, fmt.Errorf("header key cannot be empty")
+	// Para mantener el orden, usa una lista fija de claves si te interesa que sea exacta
+
+	for _, key := range HeaderKeys {
+		value, exists := headers[key]
+		if !exists {
+			continue
 		}
 
 		normalizedKey := strings.ToLower(key)
 
-		// Apply default values
 		switch normalizedKey {
 		case "user-agent":
 			if value == "" || value == "default" {
@@ -44,7 +45,6 @@ func formatHeaders(s *Session, headers map[string]string) (http.Header, error) {
 			}
 		}
 
-		// Use original key (with correct case)
 		formattedHeaders[key] = []string{value}
 		order = append(order, key)
 	}
@@ -52,6 +52,7 @@ func formatHeaders(s *Session, headers map[string]string) (http.Header, error) {
 	formattedHeaders[http.HeaderOrderKey] = order
 	return formattedHeaders, nil
 }
+
 
 // Format body with improved error handling and content-type detection
 func formatBody(headers map[string]string, body interface{}) (io.Reader, string, error) {

@@ -2,8 +2,8 @@ package bogdanfinn_go_wrapper
 
 
 // Default values for headers
-var user_agent string = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-var sech_ua string = `"Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"`
+var user_agent string = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+var sech_ua string = `"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"`
 var sech_ua_platform string = `"macOS"`
 
 
@@ -20,4 +20,23 @@ var sessionErrors []string = []string{
 	"certificate: x509",
 	"while awaiting headers",
 	"remote error",
+}
+
+var HeaderKeys []string = []string{
+	"cache-control",
+	"sec-ch-ua",
+	"sec-ch-ua-mobile",
+	"sec-ch-ua-platform",
+	"origin",
+	"content-type",
+	"upgrade-insecure-requests",
+	"user-agent",
+	"accept",
+	"sec-fetch-site",
+	"sec-fetch-mode",
+	"sec-fetch-user",
+	"sec-fetch-dest",
+	"referer",
+	"accept-language",
+	"priority",
 }
