@@ -23,6 +23,10 @@ var sessionErrors []string = []string{
 }
 
 var HeaderKeys []string = []string{
+	"authorization",
+	"api-key",
+	"api-token",
+	"partner-id",
 	"cache-control",
 	"sec-ch-ua",
 	"sec-ch-ua-mobile",
