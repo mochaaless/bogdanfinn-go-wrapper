@@ -27,6 +27,7 @@ var HeaderKeys []string = []string{
 	"sec-ch-ua",
 	"sec-ch-ua-mobile",
 	"sec-ch-ua-platform",
+	"next-action",
 	"next-router-state-tree",
 	"origin",
 	"content-type",
