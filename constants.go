@@ -28,6 +28,7 @@ var HeaderKeys []string = []string{
 	"api-key",
 	"Api-token",
 	"x-api-key",
+	"LTG-Broker-Id",
 	"api-token",
 	"partner-id",
 	"cache-control",
